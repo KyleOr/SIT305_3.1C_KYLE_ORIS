@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="#FFFFFF">
+
+    <!-- Congratulations Text -->
+    <TextView
+        android:id="@+id/congratulationsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/congratulations_message"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        android:gravity="center" />
+
+    <!-- Score Text -->
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/score_message"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp"
+        android:gravity="center" />
+
+    <!-- Take New Quiz Button -->
+    <Button
+        android:id="@+id/takeNewQuizButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/take_new_quiz_button"
+        android:textSize="20sp"
+        android:padding="15dp"
+        android:layout_marginTop="20dp" />
+
+    <!-- Finish Button -->
+    <Button
+        android:id="@+id/finishButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/finish_button"
+        android:textSize="20sp"
+        android:padding="15dp"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>

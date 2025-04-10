@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         userName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
-                // Not needed, but you can leave it empty
             }
 
             @Override
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // Not needed, but you can leave it empty
             }
         });
 

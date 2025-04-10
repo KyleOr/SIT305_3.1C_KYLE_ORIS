@@ -14,10 +14,11 @@ import androidx.core.content.ContextCompat;
 public class QuestionActivity extends AppCompatActivity {
 
     private int currentQuestion = 0;
+    private int score = 0;
     private RadioGroup radioGroup;
     private Button submitButton;
     private boolean answerSubmitted = false;
-    private TextView quizTracker; // 👈 New field for quiz tracker
+    private TextView quizTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +30,12 @@ public class QuestionActivity extends AppCompatActivity {
         submitButton = findViewById(R.id.submitButton);
         ProgressBar progressBar = findViewById(R.id.progressBar);
         TextView welcomeMessage = findViewById(R.id.welcomeMessage);
-        quizTracker = findViewById(R.id.quizTracker); // 👈 Initialize quiz tracker
+        quizTracker = findViewById(R.id.quizTracker);
 
         String userName = getIntent().getStringExtra("userName");
         welcomeMessage.setText(getString(R.string.welcome_message, TextUtils.isEmpty(userName) ? "User" : userName));
 
-        loadQuestion(questionText, radioGroup, progressBar, quizTracker); // 👈 Pass tracker
+        loadQuestion(questionText, radioGroup, progressBar, quizTracker);
 
         submitButton.setOnClickListener(v -> {
             if (!answerSubmitted) {
@@ -45,6 +46,7 @@ public class QuestionActivity extends AppCompatActivity {
 
                     if (selectedAnswerIndex == getCorrectAnswerIndex(currentQuestion)) {
                         changeRowColor(selectedRadioButton, true);
+                        score++;
                     } else {
                         changeRowColor(selectedRadioButton, false);
                     }
@@ -55,7 +57,7 @@ public class QuestionActivity extends AppCompatActivity {
             } else {
                 currentQuestion++;
                 if (currentQuestion < getTotalQuestions()) {
-                    loadQuestion(questionText, radioGroup, progressBar, quizTracker); // 👈 Update tracker
+                    loadQuestion(questionText, radioGroup, progressBar, quizTracker);
                     submitButton.setText(R.string.submit_button);
                     answerSubmitted = false;
                 } else {
@@ -86,7 +88,6 @@ public class QuestionActivity extends AppCompatActivity {
             int progress = (int) ((float) (currentQuestion + 1) / getTotalQuestions() * 100);
             progressBar.setProgress(progress);
 
-            // 👇 Update quiz tracker text properly here
             quizTracker.setText(getString(R.string.quiz_tracker, currentQuestion + 1, getTotalQuestions()));
         }
     }
@@ -96,11 +97,14 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private int getCorrectAnswerIndex(int questionIndex) {
-        return new int[]{1, 2}[questionIndex]; // Adjust this based on your actual answers
+        return new int[]{1, 2}[questionIndex];
     }
 
     private void showScore() {
         Intent intent = new Intent(QuestionActivity.this, ScoreActivity.class);
+        intent.putExtra("score", score);
+        intent.putExtra("totalQuestions", getTotalQuestions());
+        intent.putExtra("userName", getIntent().getStringExtra("userName"));
         startActivity(intent);
     }
 
